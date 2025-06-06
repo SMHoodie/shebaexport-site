@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sheba & Co. | Royal Origin. Global Flavor.</title>
+  <link rel="canonical" href="https://shebaexport.org/" />
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #15120f 0%, #0a0907 100%);
+      color: #ece7e1;
+      min-height: 100vh;
+    }
+    @keyframes beanFloat {
+  0% { transform: translate(-50%, -50%) translateY(0); }
+  100% { transform: translate(-50%, -50%) translateY(-10px); }
+}
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.01em;
+    }
+    .gold-gradient {
+      background: linear-gradient(92deg,#e4b858 15%,#f7d18d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glass {
+      background: rgba(24, 18, 11, 0.6);
+      backdrop-filter: blur(18px);
+      border: 1.5px solid rgba(228,184,88, 0.09);
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.35);
+    }
+    .bean-cursor {
+  cursor: none;
+}
+.bean-cursor * {
+  cursor: none !important;
+}
+    .pulse {
+      animation: pulseAnim 2s infinite;
+    }
+    @keyframes pulseAnim {
+      0% { box-shadow: 0 0 0 0 rgba(228,184,88,0.4);}
+      70% { box-shadow: 0 0 0 16px rgba(228,184,88,0);}
+      100% { box-shadow: 0 0 0 0 rgba(228,184,88,0);}
+    }
+    .card-hover:hover {
+      border: 2px solid #e4b858;
+      box-shadow: 0 0 24px 4px #e4b85833;
+      transform: scale(1.035);
+      transition: all 0.25s cubic-bezier(.5,1,.6,1.2);
+    }
+    .bean-float {
+      animation: beanFloat 8s ease-in-out infinite alternate;
+    }
+    @keyframes beanFloat {
+      0% { transform: translateY(0) rotate(0deg);}
+      100% { transform: translateY(-30px) rotate(8deg);}
+    }
+    .mobile-nav { transition: right 0.5s cubic-bezier(.85,0,.19,1.01); will-change: right; }
+    .mobile-nav.closed { right: -100vw; }
+    .mobile-nav.open { right: 0; }
+    .mobile-nav-bg { transition: opacity 0.3s; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+    .lux-gradient {
+      background: radial-gradient(ellipse 130% 80% at 60% 30%, #e4b85810 0%, #15120f 80%);
+      z-index: 2;
+    }
+    .queen-crop { object-fit: cover; }
+    .queen-img-animated {
+  transition: all 0.3s ease-in-out;
+}
+.gallery-img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+  </style>
+</head>
+<body class="overflow-x-hidden bean-cursor">
+
+<!-- NAVBAR -->
+<nav class="fixed w-full z-50 flex items-center px-8 py-5 bg-black/60 backdrop-blur-md border-b border-[#e4b85830] glass">
+  <img src="data/Sheba best.png" class="h-12 w-auto mr-4 rounded-full shadow-xl" alt="Sheba & Co Logo">
+  <span class="text-3xl font-serif gold-gradient font-bold tracking-wide">Sheba & Co.</span>
+  <div class="ml-auto nav-links hidden md:flex gap-8">
+    <a href="#home" class="uppercase text-base text-[#e4b858] hover:text-white transition">Home</a>
+    <a href="#origins" class="uppercase text-base text-[#e4b858] hover:text-white transition">Origins</a>
+    <a href="#about" class="uppercase text-base text-[#e4b858] hover:text-white transition">About</a>
+    <a href="#sustainability" class="uppercase text-base text-[#e4b858] hover:text-white transition">Sustainability</a>
+    <a href="#press" class="uppercase text-base text-[#e4b858] hover:text-white transition">Press</a>
+    <a href="#gallery" class="uppercase text-base text-[#e4b858] hover:text-white transition">Gallery</a>
+    <a href="#team" class="uppercase text-base text-[#e4b858] hover:text-white transition">Team</a>
+    <a href="#newsletter" class="uppercase text-base text-[#e4b858] hover:text-white transition">Newsletter</a>
+    <a href="#contact" class="uppercase text-base text-[#e4b858] hover:text-white transition">Contact</a>
+  </div>
+  <button onclick="openMobileNav()" class="ml-auto block md:hidden focus:outline-none">
+    <svg width="36" height="36" fill="none" stroke="#e4b858" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="8" y1="12" x2="28" y2="12"/>
+      <line x1="8" y1="20" x2="28" y2="20"/>
+      <line x1="8" y1="28" x2="28" y2="28"/>
+    </svg>
+  </button>
+  <div id="mobileNavBg" onclick="closeMobileNav()" class="fixed inset-0 bg-black/60 mobile-nav-bg z-40 hidden"></div>
+  <div id="mobileNav" class="mobile-nav closed fixed top-0 right-0 h-full w-[80vw] bg-[#17110a] z-50 flex flex-col gap-8 pt-16 px-8 shadow-2xl glass">
+    <button onclick="closeMobileNav()" class="absolute top-5 right-6 text-3xl text-[#e4b858]">&times;</button>
+    <a href="#home" class="uppercase text-xl text-[#e4b858] hover:text-white transition" onclick="closeMobileNav()">Home</a>
+    <a href="#origins" class="uppercase text-xl text-[#e4b858] hover:text-white transition" onclick="closeMobileNav()">Origins</a>
+    <a href="#about" class="uppercase text-xl text-[#e4b858] hover:text-white transition" onclick="closeMobileNav()">About</a>
+    <a href="#sustainability" class="uppercase text-xl text-[#e4b858] hover:text-white transition" onclick="closeMobileNav()">Sustainability</a>
+    <a href="#press" class="uppercase text-xl text-[#e4b858] hover:text-white transition" onclick="closeMobileNav()">Press</a>
+    <a href="#gallery" class="uppercase text-xl text-[#e4b858] hover:text-white transition" onclick="closeMobileNav()">Gallery</a>
+    <a href="#team" class="uppercase text-xl text-[#e4b858] hover:text-white transition" onclick="closeMobileNav()">Team</a>
+    <a href="#newsletter" class="uppercase text-xl text-[#e4b858] hover:text-white transition" onclick="closeMobileNav()">Newsletter</a>
+    <a href="#contact" class="uppercase text-xl text-[#e4b858] hover:text-white transition" onclick="closeMobileNav()">Contact</a>
+  </div>
+</nav>
+<script>
+  function openMobileNav() {
+    document.getElementById('mobileNav').classList.remove('closed');
+    document.getElementById('mobileNav').classList.add('open');
+    document.getElementById('mobileNavBg').classList.remove('hidden');
+  }
+  function closeMobileNav() {
+    document.getElementById('mobileNav').classList.remove('open');
+    document.getElementById('mobileNav').classList.add('closed');
+    document.getElementById('mobileNavBg').classList.add('hidden');
+  }
+</script>
+
+<!-- HERO SECTION -->
+<section class="relative w-full min-h-screen overflow-hidden flex justify-center items-center px-4 pt-24 pb-20 fade-in" id="home">
+  <!-- BACKGROUND GRID -->
+  <div class="absolute inset-0 grid grid-cols-3 w-full h-full z-0">
+    <!-- Left: Coffee Forest Background -->
+    <img src="data/good background pic.webp"
+     alt="Coffee forest background"
+     class="w-full h-full object-cover object-left opacity-40" />
+
+    <!-- Center: Queen of Sheba -->
+    <img src="data/queen-sheba.png"
+         alt="Queen of Sheba with Jebena"
+         class="w-full h-full object-cover object-top brightness-[0.94] contrast-[1.1] saturate-[1.05]" />
+
+    <!-- Right: Yirgacheffe Coffee Workers -->
+    <img src="data/background-yerga.webp"
+         alt="Ethiopian coffee workers drying cherries"
+         class="w-full h-full object-cover object-center opacity-30" />
+  </div>
+
+  <!-- GRADIENT OVERLAY -->
+  <div class="absolute inset-0 bg-gradient-to-t from-[#15120f]/80 to-[#322107]/40 z-0"></div>
+
+  <!-- CONTENT -->
+  <div class="relative z-10 text-center max-w-4xl">
+    <h1 class="gold-gradient text-5xl md:text-7xl font-bold drop-shadow-xl mb-4">
+      Sheba & Co.
+    </h1>
+    <div class="text-xl md:text-3xl text-[#e4b858] font-serif font-bold mb-6">
+      Royal Origin. Global Flavor.
+    </div>
+    <p class="text-base md:text-lg text-[#e4b858] font-serif font-bold drop-shadow-md max-w-2xl mx-auto">
+      Honoring Ethiopia’s rich coffee heritage — from ancient royalty to modern exports.
+    </p>
+  <div id="tagline" class="text-xl md:text-2xl text-[#e4b858] font-serif font-bold mt-6">
+  Royal Origin. Global Flavor.
+</div>
+</section>
+<script>
+  const taglines = [
+    "Royal Origin. Global Flavor.",
+    "Crowned With Heritage, Served With Grace.",
+    "From Ethiopia’s High Mountains To Your Cup.",
+    "Experience The Legend In Every Sip.",
+    "A Taste of Royalty, Rooted in Ritual.",
+    "Harvested By Hand. Shared By Heart.",
+    "The World’s Original Coffee, Perfected."
+  ];
+  let taglineIdx = 0;
+  function rotateTagline() {
+    document.getElementById('tagline').textContent = taglines[taglineIdx];
+    taglineIdx = (taglineIdx + 1) % taglines.length;
+  }
+  setInterval(rotateTagline, 3200);
+  rotateTagline();
+  gsap.from("nav", {y: -60, opacity:0, duration: 1.2, ease:"power4.out"});
+  gsap.from("h1.gold-gradient", { opacity:0, y:-80, duration:1.4, delay:0.2, ease:"power2.out" });
+  gsap.from(".queen-img-animated", {
+  scrollTrigger: {
+    trigger: ".queen-img-animated",
+    start: "top 90%",
+  },
+  y: 40,
+  opacity: 0,
+  duration: 1.4,
+  ease: "power2.out"
+});
+  gsap.from(".pulse", { scale:0.7, opacity:0, duration:1, delay:0.8, ease:"elastic" });
+</script>
+<!-- ABOUT SECTION -->
+<section id="about" class="relative py-32 px-4 bg-gradient-to-b from-[#22190e] via-[#15120f] to-[#18140e]">
+  <div class="max-w-5xl mx-auto glass rounded-3xl shadow-2xl px-8 py-14">
+    <h2 class="gold-gradient text-4xl md:text-5xl font-bold mb-8 text-center">The Sheba & Co. Manifesto</h2>
+    <p class="text-lg mb-6 text-center font-serif italic text-[#e4b858]">"We believe coffee is more than a beverage—it's a living legend. A heritage of connection, celebration, and creation."</p>
+    <div class="flex flex-col md:flex-row gap-12 items-center">
+      <div class="flex-1 flex flex-col gap-5">
+        <h3 class="gold-gradient text-2xl font-bold mb-2">Our Story</h3>
+        <p class="opacity-90">Rooted in the ancient highlands of Ethiopia, Sheba & Co. is the culmination of millennia of culture, hospitality, and craftsmanship. Inspired by the legendary Queen of Sheba, we strive to share a taste of royalty, history, and heart with every cup.</p>
+        <p class="opacity-85">From the <b>first wild coffee cherry</b> to the <b>modern coffee bar</b>, our journey is guided by reverence for origin and pursuit of the extraordinary.</p>
+        <ul class="space-y-2 text-base mt-4">
+          <li>• <span class="text-[#e4b858]">Heritage:</span> Ancient beans, timeless stories</li>
+          <li>• <span class="text-[#e4b858]">Craft:</span> Every step, hand-finished by artisans</li>
+          <li>• <span class="text-[#e4b858]">Connection:</span> Every cup brings people together</li>
+        </ul>
+      </div>
+      <div class="flex-1 flex flex-col items-center">
+        <img src="data/queen-sheba.png" class="w-64 rounded-3xl shadow-xl mb-6 queen-crop" alt="Queen of Sheba">
+        <img src="data/Sheba best.png" class="w-32 rounded-full shadow-lg border-4 border-[#e4b858] bg-black p-2" alt="Logo">
+      </div>
+    </div>
+    <blockquote class="italic text-[#e4b858] text-xl border-l-4 pl-6 border-[#e4b858] mt-10">
+      “In every origin, every story, every ceremony—we are crowned with heritage and fueled by community.”
+    </blockquote>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY & IMPACT -->
+<section id="sustainability" class="relative py-32 px-4 bg-gradient-to-b from-[#19100c] via-[#19100c] to-[#1b130a]">
+  <div class="max-w-5xl mx-auto glass rounded-3xl shadow-2xl px-8 py-14">
+    <h2 class="gold-gradient text-4xl md:text-5xl font-bold mb-8 text-center">Sustainability & Impact</h2>
+    <div class="flex flex-col md:flex-row gap-12 items-center">
+      <div class="flex-1">
+        <img src="data/Sidamo washed.jpg" class="w-full rounded-2xl shadow-xl mb-6" alt="Sustainable Farm">
+        <img src="data/Guji unwashed.webp" class="w-2/3 rounded-xl shadow-lg" alt="Guji Farm">
+      </div>
+      <div class="flex-1">
+        <h3 class="gold-gradient text-2xl font-bold mb-2">Rooted In Respect</h3>
+        <p class="mb-4 opacity-90">We honor the land and the people who give life to every harvest. Our coffee is 100% Ethiopian, sourced from estates that champion biodiversity, fair wages, and generational stewardship.</p>
+        <ul class="space-y-2 text-base">
+          <li>• <span class="text-[#e4b858]">Regenerative Agriculture:</span> No monocrops, always shade-grown and hand-picked.</li>
+          <li>• <span class="text-[#e4b858]">Direct Trade:</span> We work directly with farmers for transparency and equity.</li>
+          <li>• <span class="text-[#e4b858]">Eco-Friendly Processing:</span> Natural sun-drying, minimal water waste.</li>
+          <li>• <span class="text-[#e4b858]">Women’s Empowerment:</span> Over half our partner farms are woman-led.</li>
+          <li>• <span class="text-[#e4b858]">Community Reinvestment:</span> Profits help build schools and clean water projects in rural Ethiopia.</li>
+        </ul>
+        <blockquote class="italic text-[#e4b858] text-lg border-l-4 pl-5 border-[#e4b858] mt-8">
+          “Luxury is nothing without integrity. Sheba & Co. is proud to protect the lands and families that make true coffee possible.”
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  gsap.utils.toArray('#about .glass, #sustainability .glass').forEach(el => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: "top 90%" },
+      opacity: 0, y: 50, duration: 1.1, ease: "power2.out"
+    });
+  });
+</script>
+<!-- PRESS / BLOG SECTION -->
+<section id="press" class="relative py-32 px-4 bg-gradient-to-b from-[#18140e] via-[#19100c] to-[#15120f]">
+  <div class="max-w-5xl mx-auto glass rounded-3xl shadow-2xl px-8 py-14">
+    <h2 class="gold-gradient text-4xl md:text-5xl font-bold mb-10 text-center">Sheba & Co. in the News</h2>
+    <div class="flex flex-col md:flex-row gap-10">
+      <!-- Blog Card 1 -->
+      <div class="flex-1 bg-black/30 rounded-2xl p-6 flex flex-col items-start shadow-lg border border-[#e4b85830] hover:scale-105 transition">
+        <img src="data/best_ethiopian_coffee.jpg" class="w-full h-40 object-cover rounded-xl mb-4" alt="Press Image">
+        <div class="gold-gradient text-lg font-bold mb-2">Vogue Magazine</div>
+        <p class="text-sm opacity-90 mb-2">“The most authentic luxury coffee experience we’ve ever tried. It’s not just a brand—it’s a movement.”</p>
+        <a href="#" class="text-[#e4b858] font-bold underline hover:text-white text-xs">Read Full Feature</a>
+      </div>
+      <!-- Blog Card 2 -->
+      <div class="flex-1 bg-black/30 rounded-2xl p-6 flex flex-col items-start shadow-lg border border-[#e4b85830] hover:scale-105 transition">
+        <img src="data/Harrar-beans.jpg" class="w-full h-40 object-cover rounded-xl mb-4" alt="Press Image">
+        <div class="gold-gradient text-lg font-bold mb-2">Global Barista Journal</div>
+        <p class="text-sm opacity-90 mb-2">“Ethiopia’s gift to the world, remastered for the 21st century. Sheba & Co. elevates every cup.”</p>
+        <a href="#" class="text-[#e4b858] font-bold underline hover:text-white text-xs">Read Article</a>
+      </div>
+      <!-- Blog Card 3 -->
+      <div class="flex-1 bg-black/30 rounded-2xl p-6 flex flex-col items-start shadow-lg border border-[#e4b85830] hover:scale-105 transition">
+        <img src="data/Sidamo washed.jpg" class="w-full h-40 object-cover rounded-xl mb-4" alt="Press Image">
+        <div class="gold-gradient text-lg font-bold mb-2">NY Times Food</div>
+        <p class="text-sm opacity-90 mb-2">“From rural Ethiopia to Paris and New York—Sheba & Co. is rewriting the story of global coffee.”</p>
+        <a href="#" class="text-[#e4b858] font-bold underline hover:text-white text-xs">See Story</a>
+      </div>
+    </div>
+    <div class="mt-10 text-center opacity-60 italic">
+      Featured in: Vogue &nbsp;•&nbsp; Bon Appétit &nbsp;•&nbsp; NY Times &nbsp;•&nbsp; GQ &nbsp;•&nbsp; Barista Journal
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN DEEP DIVES -->
+<section id="origins" class="relative py-32 px-4 bg-gradient-to-b from-[#19100c] via-[#20160f] to-[#18140e]">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="gold-gradient text-4xl md:text-5xl font-bold mb-10 text-center">Explore Our Regions</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <!-- SIDAMO -->
+      <div class="glass card-hover p-8 rounded-2xl flex flex-col items-center text-center shadow-xl transition-all hover:scale-105">
+        <img src="data/Sidamo washed.jpg" class="w-full h-48 object-cover rounded-xl mb-5 shadow-xl" alt="Sidamo">
+        <h3 class="gold-gradient text-2xl font-bold mb-2">Sidamo</h3>
+        <div class="text-[#e4b858] mb-2">1,750–2,200m</div>
+        <p class="text-base opacity-80 mb-2">Known for its vibrant acidity, floral aroma, and delicate lemon notes. Sidamo’s volcanic soil produces coffees with unmatched brightness and body.</p>
+        <a href="#" class="text-[#e4b858] underline hover:text-white text-xs">Learn More</a>
+      </div>
+      <!-- YIRGACHEFFE -->
+      <div class="glass card-hover p-8 rounded-2xl flex flex-col items-center text-center shadow-xl transition-all hover:scale-105">
+        <img src="data/Yirgacheffe unroasted.webp" class="w-full h-48 object-cover rounded-xl mb-5 shadow-xl" alt="Yirgacheffe">
+        <h3 class="gold-gradient text-2xl font-bold mb-2">Yirgacheffe</h3>
+        <div class="text-[#e4b858] mb-2">1,800–2,100m</div>
+        <p class="text-base opacity-80 mb-2">World-renowned for jasmine aroma, clean citrus notes, and tea-like clarity. The birthplace of “washed” Ethiopian coffee.</p>
+        <a href="#" class="text-[#e4b858] underline hover:text-white text-xs">Learn More</a>
+      </div>
+      <!-- GUJI -->
+      <div class="glass card-hover p-8 rounded-2xl flex flex-col items-center text-center shadow-xl transition-all hover:scale-105">
+        <img src="data/Guji unwashed.webp" class="w-full h-48 object-cover rounded-xl mb-5 shadow-xl" alt="Guji">
+        <h3 class="gold-gradient text-2xl font-bold mb-2">Guji</h3>
+        <div class="text-[#e4b858] mb-2">1,900–2,300m</div>
+        <p class="text-base opacity-80 mb-2">Wild, fruity, and cocoa-toned. Guji beans are handpicked by artisan farmers in a lush, untouched region famed for complexity and rich, wine-like flavors.</p>
+        <a href="#" class="text-[#e4b858] underline hover:text-white text-xs">Learn More</a>
+      </div>
+      <!-- HARRAR -->
+      <div class="glass card-hover p-8 rounded-2xl flex flex-col items-center text-center shadow-xl transition-all hover:scale-105">
+        <img src="data/Harrar-beans.jpg" class="w-full h-48 object-cover rounded-xl mb-5 shadow-xl" alt="Harrar">
+        <h3 class="gold-gradient text-2xl font-bold mb-2">Harrar</h3>
+        <div class="text-[#e4b858] mb-2">1,600–2,000m</div>
+        <p class="text-base opacity-80 mb-2">The ancient trading route. Harrar’s beans are sun-dried, yielding blueberry, spice, and a full, heavy body—favored by royalty and baristas alike.</p>
+        <a href="#" class="text-[#e4b858] underline hover:text-white text-xs">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  gsap.utils.toArray('#press .bg-black\\/30, #origins .glass').forEach(el => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: "top 85%" },
+      opacity: 0, y: 40, duration: 1, ease: "back.out(1.5)"
+    });
+  });
+</script>
+<!-- GALLERY SECTION -->
+<h2 class="gold-gradient text-4xl md:text-5xl font-bold mb-12 text-center">Gallery of Legends</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
+<!-- Queen of Sheba – face aligned -->
+<img src="data/queen-sheba.png" alt="Queen of Sheba"
+     class="w-[320px] h-40 object-cover object-top rounded-xl shadow-lg hover:scale-105 transition duration-300 gallery-img"
+<!-- Espresso shot -->
+<img src="data/best_ethiopian_coffee.jpg" alt="Espresso Cup"
+     class="w-[320px] h-40 object-cover rounded-xl shadow-lg hover:scale-105 transition duration-300 gallery-img" />
+<!-- Harrar beans -->
+<img src="data/Harrar-beans.jpg" alt="Harrar Beans"
+     class="w-[320px] h-40 object-cover rounded-xl shadow-lg hover:scale-105 transition duration-300 gallery-img" />
+<!-- New image from data folder -->
+<img src="data/Yirgacheffe unroasted.webp" alt="Yirgacheffe Unroasted"
+     class="w-[320px] h-40 object-cover rounded-xl shadow-lg hover:scale-105 transition duration-300 gallery-img" />
+<!-- Sidamo beans -->
+<img src="data/Sidamo washed.jpg" alt="Sidamo Beans"
+     class="w-[320px] h-40 object-cover rounded-xl shadow-lg hover:scale-105 transition duration-300 gallery-img" />
+<!-- Guji scoop -->
+<img src="data/Guji unwashed.webp" alt="Guji Beans"
+     class="w-[320px] h-40 object-cover rounded-xl shadow-lg hover:scale-105 transition duration-300 gallery-img" />
+</div> <!-- closes he gallery grid after all 6 images -->
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center">
+    <img id="lightbox-img" src="" alt="" class="max-h-[90vh] max-w-[90vw] rounded-2xl shadow-2xl border-4 border-[#e4b858]">
+    <button onclick="closeLightbox()" class="absolute top-10 right-10 text-white text-5xl">&times;</button>
+  </div>
+</section>
+
+<!-- PARTNERS/AWARDS CAROUSEL -->
+<section id="awards" class="relative py-24 px-4 bg-gradient-to-b from-[#19100c] via-[#211a11] to-[#262108]">
+  <div class="max-w-6xl mx-auto glass rounded-3xl shadow-2xl px-8 py-10">
+    <h2 class="gold-gradient text-3xl md:text-4xl font-bold mb-10 text-center">Our Global Partners & Awards</h2>
+    <div id="partner-carousel" class="flex overflow-x-auto gap-10 no-scrollbar py-4 px-2">
+      <!-- Partner/Award Avatars -->
+      <div class="min-w-[180px] flex flex-col items-center">
+        <img src="data/Queen of Sheba.jpg" class="w-24 h-24 object-cover rounded-full border-2 border-[#e4b858] shadow-xl mb-2" alt="Luxury Partner">
+        <span class="gold-gradient font-bold">Paris Roastery</span>
+      </div>
+      <div class="min-w-[180px] flex flex-col items-center">
+        <img src="data/best_ethiopian_coffee.jpg" class="w-24 h-24 object-cover rounded-full border-2 border-[#e4b858] shadow-xl mb-2" alt="Barista Guild">
+        <span class="gold-gradient font-bold">Barista Guild</span>
+      </div>
+      <div class="min-w-[180px] flex flex-col items-center">
+        <img src="data/Sidamo washed.jpg" class="w-24 h-24 object-cover rounded-full border-2 border-[#e4b858] shadow-xl mb-2" alt="Green Bean Importers">
+        <span class="gold-gradient font-bold">Green Bean Importers</span>
+      </div>
+      <div class="min-w-[180px] flex flex-col items-center">
+        <img src="data/Guji unwashed.webp" class="w-24 h-24 object-cover rounded-full border-2 border-[#e4b858] shadow-xl mb-2" alt="Luxury Hotels">
+        <span class="gold-gradient font-bold">Luxury Hotels</span>
+      </div>
+      <div class="min-w-[180px] flex flex-col items-center">
+        <img src="data/Harrar-beans.jpg" class="w-24 h-24 object-cover rounded-full border-2 border-[#e4b858] shadow-xl mb-2" alt="Global Expo">
+        <span class="gold-gradient font-bold">Global Expo</span>
+      </div>
+    </div>
+    <div class="mt-8 text-center opacity-60 italic text-xs">Swipe left/right to see all partners & awards</div>
+  </div>
+</section>
+
+<script>
+  // Carousel auto-scroll (simulate slider)
+  let carousel = document.getElementById('partner-carousel');
+  let scrollAmount = 0;
+  setInterval(() => {
+    if(carousel){
+      carousel.scrollLeft += 200;
+      scrollAmount += 200;
+      if(scrollAmount > carousel.scrollWidth - carousel.clientWidth) {
+        carousel.scrollLeft = 0;
+        scrollAmount = 0;
+      }
+    }
+  }, 3500);
+
+  // Lightbox for gallery
+  const galleryImgs = document.querySelectorAll('.gallery-img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  galleryImgs.forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+    });
+  });
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    lightboxImg.src = "";
+  }
+  lightbox && lightbox.addEventListener('click', e => {
+    if(e.target === lightbox) closeLightbox();
+  });
+
+  // Animate partners and gallery
+  gsap.utils.toArray('#awards .min-w-\\[180px\\], #gallery-grid img').forEach(el => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: "top 92%" },
+      opacity: 0, y: 30, duration: 0.8, ease: "power2.out"
+    });
+  });
+</script>
+<!-- TEAM SECTION -->
+<section id="team" class="relative py-32 px-4 bg-gradient-to-b from-[#18140e] via-[#19100c] to-[#15120f]">
+  <div class="max-w-6xl mx-auto glass rounded-3xl shadow-2xl px-8 py-14">
+    <h2 class="gold-gradient text-4xl md:text-5xl font-bold mb-10 text-center">Meet The Team</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div class="flex flex-col items-center bg-black/30 p-8 rounded-2xl shadow-xl card-hover">
+        <img src="data/Queen of Sheba.jpg" class="w-32 h-32 object-cover rounded-full border-4 border-[#e4b858] mb-4 queen-crop" style="object-position:top;" alt="Founder">
+        <div class="gold-gradient text-2xl font-bold mb-1">Alem Kebede</div>
+        <div class="opacity-80 mb-2">Founder &amp; CEO</div>
+        <p class="text-sm opacity-80">Alem's heritage and vision led Sheba & Co. to global renown. “My grandmother’s ceremony was my first lesson in luxury.”</p>
+      </div>
+      <div class="flex flex-col items-center bg-black/30 p-8 rounded-2xl shadow-xl card-hover">
+        <img src="data/Sidamo washed.jpg" class="w-32 h-32 object-cover rounded-full border-4 border-[#e4b858] mb-4" alt="Roastmaster">
+        <div class="gold-gradient text-2xl font-bold mb-1">Desta Amare</div>
+        <div class="opacity-80 mb-2">Head Roastmaster</div>
+        <p class="text-sm opacity-80">Every batch is personally roasted by Desta, whose family has tended Sidamo’s hillsides for six generations.</p>
+      </div>
+      <div class="flex flex-col items-center bg-black/30 p-8 rounded-2xl shadow-xl card-hover">
+        <img src="data/Harrar-beans.jpg" class="w-32 h-32 object-cover rounded-full border-4 border-[#e4b858] mb-4" alt="Export Director">
+        <div class="gold-gradient text-2xl font-bold mb-1">Fatima Yusuf</div>
+        <div class="opacity-80 mb-2">Export Director</div>
+        <p class="text-sm opacity-80">Fatima connects Ethiopia’s beans to the world, ensuring fair trade and sustainable impact every step of the way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER SIGNUP -->
+<section id="newsletter" class="relative py-32 px-4 bg-gradient-to-b from-[#22190e] via-[#15120f] to-[#18140e]">
+  <div class="max-w-xl mx-auto glass rounded-3xl shadow-2xl px-8 py-14 flex flex-col items-center">
+    <h2 class="gold-gradient text-3xl md:text-4xl font-bold mb-5 text-center">Stay In The Circle</h2>
+    <p class="text-base mb-8 text-center opacity-90">Sign up for the Sheba & Co. newsletter to get exclusive access to new harvests, events, and stories from Ethiopia’s heartland.</p>
+    <form class="flex flex-col md:flex-row gap-4 w-full items-center justify-center" onsubmit="event.preventDefault(); openModal();">
+      <input required type="email" placeholder="Your email address" class="flex-1 p-4 rounded-xl bg-black/60 border-2 border-[#e4b85860] focus:outline-none focus:ring-2 focus:ring-[#e4b858] text-lg"/>
+      <button type="submit" class="bg-[#e4b858] text-[#262108] font-semibold rounded-xl px-8 py-4 transition-all hover:scale-105 pulse">Join Now</button>
+    </form>
+    <div class="text-xs text-[#e4b858] opacity-60 mt-4">No spam. Ever. Just culture and coffee.</div>
+  </div>
+  <!-- Modal Thank You Popup -->
+  <div id="newsletter-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center">
+    <div class="bg-[#211a11] text-[#e4b858] rounded-2xl shadow-2xl p-10 text-center border-2 border-[#e4b858] max-w-sm mx-auto">
+      <div class="text-2xl font-bold mb-2 gold-gradient">Thank you!</div>
+      <div class="mb-4">You're officially in the circle.<br/>Check your inbox for something magical soon.</div>
+      <button onclick="closeModal()" class="bg-[#e4b858] text-[#211a11] font-semibold px-8 py-2 rounded-full hover:scale-105 transition">Close</button>
+    </div>
+  </div>
+</section>
+<script>
+  // Newsletter modal logic
+  function openModal() {
+    document.getElementById('newsletter-modal').classList.remove('hidden');
+    document.getElementById('newsletter-modal').classList.add('flex');
+  }
+  function closeModal() {
+    document.getElementById('newsletter-modal').classList.add('hidden');
+    document.getElementById('newsletter-modal').classList.remove('flex');
+  }
+  gsap.utils.toArray('#team .card-hover, #newsletter .glass').forEach(el => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: "top 90%" },
+      opacity: 0, y: 40, duration: 1, ease: "power2.out"
+    });
+  });
+</script>
+<!-- CONTACT SECTION -->
+<section id="contact" class="relative py-32 px-4 bg-gradient-to-b from-[#15120f] via-[#22190e] to-[#19100c]">
+  <div class="max-w-3xl mx-auto glass rounded-3xl shadow-2xl px-8 py-14">
+    <h2 class="gold-gradient text-4xl md:text-5xl font-bold mb-8 text-center">Contact Us</h2>
+    <p class="text-base mb-8 text-center opacity-90">Want to collaborate, wholesale, or just say hello? Reach out below and a member of our team will respond with true Ethiopian hospitality.</p>
+    <form class="flex flex-col gap-6">
+      <input required type="text" placeholder="Full Name" class="p-4 rounded-xl bg-black/60 border-2 border-[#e4b85860] focus:outline-none focus:ring-2 focus:ring-[#e4b858] text-lg"/>
+      <input required type="email" placeholder="Email Address" class="p-4 rounded-xl bg-black/60 border-2 border-[#e4b85860] focus:outline-none focus:ring-2 focus:ring-[#e4b858] text-lg"/>
+      <textarea required placeholder="Your Message" class="p-4 rounded-xl bg-black/60 border-2 border-[#e4b85860] focus:outline-none focus:ring-2 focus:ring-[#e4b858] text-lg min-h-[120px]"></textarea>
+      <button type="submit" class="bg-[#e4b858] text-[#262108] font-semibold rounded-xl px-8 py-4 transition-all hover:scale-105 pulse">Send Message</button>
+    </form>
+    <div class="text-xs text-[#e4b858] opacity-60 mt-8">Sheba & Co., Addis Ababa | info@shebacoffee.com</div>
+  </div>
+</section>
+
+<!-- LUXURY GLASS FOOTER -->
+<footer class="w-full py-14 bg-black/90 text-[#e4b858] text-center mt-12 glass border-t border-[#e4b85833]">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex flex-col items-center md:items-start">
+      <img src="data/Sheba best.png" alt="Sheba Logo"
+     class="w-64 h-40 object-cover rounded-xl shadow-lg hover:scale-105 transition duration-300 gallery-img" />
+      <div class="gold-gradient text-2xl font-serif font-bold mb-1">Sheba & Co.</div>
+      <div class="text-sm opacity-70 mb-2">Royal Origin. Global Flavor.<br>Crowned With Heritage.<br>© 2025 Sheba & Co. All rights reserved.</div>
+    </div>
+    <div class="flex gap-8 items-center justify-center">
+      <a href="#" class="hover:underline text-[#e4b858] opacity-80 transition">Instagram</a>
+      <a href="#" class="hover:underline text-[#e4b858] opacity-80 transition">LinkedIn</a>
+      <a href="#" class="hover:underline text-[#e4b858] opacity-80 transition">TikTok</a>
+      <a href="#" class="hover:underline text-[#e4b858] opacity-80 transition">Facebook</a>
+    </div>
+    <div class="flex flex-col items-center md:items-end text-xs gap-1 opacity-60">
+      <a href="#about" class="hover:text-white transition">About</a>
+      <a href="#sustainability" class="hover:text-white transition">Sustainability</a>
+      <a href="#press" class="hover:text-white transition">Press</a>
+      <a href="#contact" class="hover:text-white transition">Contact</a>
+      <a href="#" class="hover:text-white transition">Terms</a>
+      <a href="#" class="hover:text-white transition">Privacy</a>
+    </div>
+  </div>
+</footer>
+<script>
+  // Footer and contact fade-in
+  gsap.from('footer', {
+    scrollTrigger: { trigger: 'footer', start: "top 96%" },
+    opacity: 0, y: 50, duration: 1.2, ease: "power2.out"
+  });
+  gsap.from('#contact .glass', {
+    scrollTrigger: { trigger: '#contact', start: "top 95%" },
+    opacity: 0, y: 60, duration: 1, ease: "power2.out"
+  });
+
+  // Smooth scroll for anchor links (all sections)
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+<!-- ⬇ Paste this just before </body> -->
+<script>
+  const beanCursor = document.createElement('div');
+  beanCursor.style.position = 'fixed';
+  beanCursor.style.width = '24px';
+  beanCursor.style.height = '36px';
+  beanCursor.style.pointerEvents = 'none';
+  beanCursor.style.zIndex = '9999';
+  beanCursor.style.background = 'url("data/coffee-cursor.png") no-repeat center center';
+  beanCursor.style.backgroundSize = 'contain';
+  beanCursor.style.animation = 'beanFloat 2.5s ease-in-out infinite alternate';
+  beanCursor.style.transform = 'translate(-50%, -50%)';
+  document.body.appendChild(beanCursor);
+
+  let mouseX = 0, mouseY = 0;
+  let currentX = 0, currentY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+   currentX += (mouseX - currentX) * 0.65;
+currentY += (mouseY - currentY) * 0.65;
+    beanCursor.style.left = `${currentX}px`;
+    beanCursor.style.top = `${currentY}px`;
+    requestAnimationFrame(animateCursor);
+  }
+
+  animateCursor();
+</script>
+</body>
+</html>
